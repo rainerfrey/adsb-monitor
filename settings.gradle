@@ -1,0 +1,2 @@
+rootProject.name = 'adsb-monitor'
+include 'ui-backend', 'dump1090-connector'
