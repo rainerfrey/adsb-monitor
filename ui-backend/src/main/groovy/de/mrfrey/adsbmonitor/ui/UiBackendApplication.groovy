@@ -1,4 +1,4 @@
-package de.mrfrey.adsbmonitor.connector
+package de.mrfrey.adsbmonitor.ui
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication

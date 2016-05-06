@@ -1,0 +1,6 @@
+{{#if flight.aircraft}}
+  <a href="http://www.airframes.org/reg/{{flight.aircraft.registration}}" target="_blank">Aircraft
+      Infos (Airframes)</a><br/>
+{{else}}
+  {{airframe-icao flight=flight}}<br/>
+{{/if}}

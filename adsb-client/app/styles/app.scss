@@ -1,0 +1,34 @@
+$component-active-bg: #FF8000;
+@import "bootstrap";
+@import "bootstrap/theme";
+
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
+
+body {
+  padding-top: 52px;
+}
+
+.g-map-canvas {
+  height: 600px;
+  width: 100%;
+  min-width: 500px;
+}
+
+.panel {
+  font-size: smaller;
+}
+
+.info-window {
+  margin-bottom: 2px;
+}
+
+.ember-modal-dialog {
+  width: 240px;
+  margin-top: 10px;
+}
+
+.scrollabe {
+  overflow-y: scroll;
+  max-height: 290px;
+}

@@ -5,17 +5,33 @@ module.exports = function(environment) {
     modulePrefix: 'adsb-client',
     environment: environment,
     baseURL: '/',
-    locationType: 'auto',
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
-      }
+      },
+      ENABLE_DS_FILTER: true
     },
 
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    'g-map': {
+      key: 'AIzaSyDN77dL_9QXOqlcmtJTnAwkKaOHaH_QYMA'
+    },
+    moment: {
+      // allowEmpty: true
+    },
+    adsb: {
+      home: {
+        lat: 47.859541,
+        lng: 7.693784
+      },
+      timeframe: 15,
+      liveMonitoring: true
     }
   };
 

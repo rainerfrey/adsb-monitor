@@ -1,0 +1,10 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">Flights</h4> (Updated: {{moment-from-now lastTimestamp interval=3000}})
+    </div>
+    <ul class="list-group scrollabe">
+      {{#each flights as |flight|}}
+        {{flight-list-entry flight=flight selected=(eq flight currentFlight) onSelect=selectFlight}}
+      {{/each}}
+    </ul>
+</div>

@@ -1,0 +1,26 @@
+{{#if flight}}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">{{flight.flightId}}
+          {{#if flight.aircraft}}
+              - {{flight.aircraft.operator.name}}
+          {{/if}}</h4>
+      {{#if flight.aircraft}}
+          <h5>Aircraft: {{flight.aircraft.model.name}} ({{flight.aircraft.registration}})</h5>
+      {{/if}}
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item"><b>Speed:</b> {{flight.speed}} kts - <b>Altitude:</b> {{flight.altitude}} ft</li>
+        <li class="list-group-item">
+            <a href="http://planefinder.net/flight/{{flight.flightId}}" target="_blank">Planefinder</a> - <a
+                href="http://fr24.com/{{flight.flightId}}" target="_blank">Flightradar 24</a><br/>
+          {{airframe-link flight=flight}}
+          {{#if flight.aircraft}}
+              <a href="http://www.planepictures.net/netsearch4.cgi?stype=reg&srng=1&srch={{flight.aircraft.registration}}"
+                 target="_blank">Pictures (Planepictures)</a>
+          {{/if}}
+        </li>
+        <li class="list-group-item">Last seen: {{moment-from-now flight.lastTimestamp interval=3000}}</li>
+    </ul>
+</div>
+{{/if}}

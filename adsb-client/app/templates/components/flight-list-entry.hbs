@@ -1,0 +1,6 @@
+{{#clickable-li onClick=(action onSelect flight) class=(concat (if selected "active ") "list-group-item")}}
+  {{flight.flightId}}
+  {{#if flight.aircraft}}
+      - {{flight.aircraft.operator.name}}
+  {{/if}}
+{{/clickable-li}}
