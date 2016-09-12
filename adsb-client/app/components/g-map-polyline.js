@@ -66,13 +66,13 @@ const GMapPolyLineComponent = Ember.Component.extend({
       strokeColor: color,
       strokeOpacity: 0.8,
       strokeWeight: weight
-    }
+    };
   },
 
   setLineOptions() {
     let line = this.get('line');
     if(isPresent(line)) {
-      line.setOptions(this.getPolyLineOptions())
+      line.setOptions(this.getPolyLineOptions());
     }
   },
 

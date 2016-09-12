@@ -12,4 +12,4 @@ export default Model.extend({
   heading: attr('number'),
   lastTimestamp: attr('date'),
   positions: attr()
-})
+});

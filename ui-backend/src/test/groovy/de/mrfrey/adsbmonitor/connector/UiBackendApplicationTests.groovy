@@ -1,5 +1,6 @@
 package de.mrfrey.adsbmonitor.connector
 
+import de.mrfrey.adsbmonitor.ui.UiBackendApplication
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.test.context.web.WebAppConfiguration;

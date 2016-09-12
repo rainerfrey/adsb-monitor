@@ -1,3 +1,4 @@
 group 'de.mrfrey.adsbmonitor'
 version '1.0.0'
 
+apply plugin: 'base'

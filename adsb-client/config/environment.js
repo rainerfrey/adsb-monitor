@@ -31,7 +31,8 @@ module.exports = function(environment) {
         lng: 7.693784
       },
       timeframe: 15,
-      liveMonitoring: true
+      liveMonitoring: true,
+      server: "http://localhost:8080"
     }
   };
 
@@ -56,7 +57,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.adsb.server = "http://pi3:8080"
   }
 
   return ENV;
