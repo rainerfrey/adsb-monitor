@@ -4,14 +4,18 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'adsb-client',
     environment: environment,
-    baseURL: '/',
+    rootURL: '/',
     locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
       },
-      ENABLE_DS_FILTER: true
+      ENABLE_DS_FILTER: true,
+      EXTEND_PROTOTYPES: {
+        // Prevent Ember Data from overriding Date.parse.
+        Date: false
+      }
     },
 
     APP: {
@@ -46,7 +50,6 @@ module.exports = function(environment) {
 
   if (environment === 'test') {
     // Testem prefers this...
-    ENV.baseURL = '/';
     ENV.locationType = 'none';
 
     // keep test console output quieter
@@ -57,7 +60,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.adsb.server = "http://pi3:8080"
+    ENV.adsb.server = "http://pi3:8080";
   }
 
   return ENV;
