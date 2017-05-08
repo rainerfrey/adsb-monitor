@@ -1,5 +1,15 @@
-management.context-path=/admin
-spring.data.mongodb.database=adsbmonitor
-spring.jackson.serialization.indent_output=true
-spring.jackson.serialization.write_dates_as_timestamps=false
-server.port=8080
+server:
+  port: 8080
+
+management:
+  context-path: /admin
+spring:
+  data:
+    mongodb:
+      database: adsbmonitor
+
+spring:
+  jackson:
+    serialization:
+      indent_output: true
+      write_dates_as_timestamps: false
