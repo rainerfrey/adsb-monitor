@@ -1,0 +1,11 @@
+management:context-path: /admin
+mqtt:url: tcp://pi3:1883
+mqtt:publish:clientid: sdrconnectorpub
+mqtt:subscribe:clientid: sdrconnectorsub
+adsb:mongodb:collection: positionData
+adsb:mqtt:inbound-topic: adsb/input
+adsb:mqtt:outbound-topic: adsb/output
+spring:jackson:deserialization:use_long_for_ints: true
+spring:data:mongodb:database: adsbmonitor
+server:port: 9090
+spring:data:mongodb:host: 
