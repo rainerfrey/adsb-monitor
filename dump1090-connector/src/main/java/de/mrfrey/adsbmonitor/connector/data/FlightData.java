@@ -105,8 +105,23 @@ public class FlightData {
         return flightId;
     }
 
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public String getIcao() {
+        return icao;
+    }
+
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
 }

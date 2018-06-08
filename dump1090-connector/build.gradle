@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '1.3.5.RELEASE'
+		springBootVersion = '1.5.7.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -11,7 +11,7 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 
 jar {
 	baseName = 'dump1090-connector'
@@ -35,17 +35,22 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-integration')
 	compile('org.springframework.integration:spring-integration-mqtt')
 	compile('org.springframework.integration:spring-integration-mongodb')
-	compile('org.springframework.integration:spring-integration-java-dsl:1.1.2.RELEASE')
+	compile('org.springframework.integration:spring-integration-http')
+	compile('org.springframework.integration:spring-integration-java-dsl')
+	compile('org.springframework.integration:spring-integration-aws:1.0.0.RELEASE')
+	compile('org.springframework.cloud:spring-cloud-aws-autoconfigure')
+	compile('org.springframework.cloud:spring-cloud-aws-messaging')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.apache.commons:commons-lang3:3.4')
 	compile('org.jolokia:jolokia-core')
-	compile('de.codecentric:spring-boot-admin-starter-client:1.3.2')
+	compile('org.gavaghan:geodesy:1.1.3')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 dependencyManagement {
 	imports { 
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.RELEASE"
+		mavenBom 'com.amazonaws:aws-java-sdk-bom:1.11.210'
 	}
 }
 

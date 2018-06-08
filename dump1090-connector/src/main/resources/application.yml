@@ -3,24 +3,45 @@ server:
 
 management:
   context-path: /admin
+  security:
+    enabled: false
 
 mqtt:
   url: tcp://pi3:1883
-  publish:clientid: sdrconnectorpub
-  subscribe:clientid: sdrconnectorsub
+  publish.clientid: sdrconnectorpub-local
+  subscribe.clientid: sdrconnectorsub-local
 
 adsb:
   mongodb:
     collection: positionData
+    message-store-collection: awsAggegator
   mqtt:
     inbound-topic: adsb/input
     outbound-topic: adsb/output
+  aws:
+    enabled: true
+    topic: ""
+  home:
+    latitude: 47.859541
+    longitude: 7.693784
+
 
 spring:
   jackson:
     deserialization:
       use_long_for_ints: true
+    serialization:
+      write_null_map_values: false
+
   data:
     mongodb:
       database: adsbmonitor
       host: ""
+
+cloud:
+  aws:
+    credentials:
+      accessKey: ""
+      secretKey: ""
+    region:
+      static: eu-central-1
