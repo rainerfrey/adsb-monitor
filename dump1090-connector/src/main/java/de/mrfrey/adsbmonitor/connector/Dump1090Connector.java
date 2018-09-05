@@ -1,9 +1,11 @@
 package de.mrfrey.adsbmonitor.connector;
 
 import com.amazonaws.services.sns.AmazonSNS;
+import com.amazonaws.services.sns.AmazonSNSAsync;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.mrfrey.adsbmonitor.connector.aggregate.LatestOnlyAggregator;
 import de.mrfrey.adsbmonitor.connector.config.AdsbConfiguration;
+import de.mrfrey.adsbmonitor.connector.config.AmazonSNSConfiguration;
 import de.mrfrey.adsbmonitor.connector.data.AwsData;
 import de.mrfrey.adsbmonitor.connector.data.FlightData;
 import de.mrfrey.adsbmonitor.connector.flow.AwsFlightTransformer;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.Ordered;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.expression.common.LiteralExpression;
@@ -42,10 +45,11 @@ import org.springframework.messaging.MessageHandler;
 
 import java.util.Map;
 
-import static org.springframework.integration.dsl.support.Transformers.fromJson;
-import static org.springframework.integration.dsl.support.Transformers.toJson;
+import static org.springframework.integration.dsl.Transformers.fromJson;
+import static org.springframework.integration.dsl.Transformers.toJson;
 
 @SpringBootApplication
+@Import( AmazonSNSConfiguration.class )
 public class Dump1090Connector {
     @Value( "${mqtt.url}" )
     private String mqttUrl;
@@ -139,8 +143,9 @@ public class Dump1090Connector {
         return new DuplicateFilter();
     }
 
+
     @Bean
-    public MessageHandler snsMessageHandler() {
+    public MessageHandler snsMessageHandler( AmazonSNSAsync amazonSNS ) {
         SnsMessageHandler handler = new SnsMessageHandler( amazonSNS );
         handler.setTopicArn( configuration.getAws().getTopic() );
         String bodyExpression = "T(org.springframework.integration.aws.support.SnsBodyBuilder).withDefault(payload)";
@@ -149,7 +154,7 @@ public class Dump1090Connector {
     }
 
     @Bean
-    public IntegrationFlow flightdata( DuplicateFilter duplicateFilter, AwsFlightTransformer awsFlightTransformer ) {
+    public IntegrationFlow flightdata( DuplicateFilter duplicateFilter, AwsFlightTransformer awsFlightTransformer, SnsMessageHandler snsMessageHandler ) {
         Jackson2JsonObjectMapper om = new Jackson2JsonObjectMapper( mapper );
         return IntegrationFlows.from( inbound() )
                                .transform( fromJson( Map.class, om ) )
@@ -165,27 +170,27 @@ public class Dump1090Connector {
                                    .header( MqttHeaders.TOPIC, null, true )
                                )
                                .publishSubscribeChannel( s -> {
-                                     s
-                                         .subscribe( f -> f
-                                             .handle( mongoPersistence() ) )
-                                         .subscribe( f -> f
-                                             .transform( FlightData::toMap )
-                                             .transform( toJson() )
-                                             .handle( outbound() )
-                                         )
-                                         .subscribe( f -> f.handle( System.out::println ) );
+                                                             s
+                                                                 .subscribe( f -> f
+                                                                     .handle( mongoPersistence() ) )
+                                                                 .subscribe( f -> f
+                                                                     .transform( FlightData::toMap )
+                                                                     .transform( toJson() )
+                                                                     .handle( outbound() )
+                                                                 )
+                                                                 .subscribe( f -> f.handle( System.out::println ) );
 
-                                     if ( configuration.getAws().isEnabled() ) {
-                                         s.subscribe( f -> f
-                                             .handle( awsAggregator() )
-                                             .transform( awsFlightTransformer::transform )
-                                             .filter( (AwsData flight) -> flight.getRegistration() != null )
-                                             .transform( toJson() )
-                                             .log()
-                                             .handle( snsMessageHandler() )
-                                         );
-                                     }
-                                 }
+                                                             if ( configuration.getAws().isEnabled() ) {
+                                                                 s.subscribe( f -> f
+                                                                     .handle( awsAggregator() )
+                                                                     .transform( awsFlightTransformer::transform )
+                                                                     .filter( ( AwsData flight ) -> flight.getRegistration() != null )
+                                                                     .transform( toJson() )
+                                                                     .log()
+                                                                     .handle( snsMessageHandler )
+                                                                 );
+                                                             }
+                                                         }
 
                                )
                                .get();

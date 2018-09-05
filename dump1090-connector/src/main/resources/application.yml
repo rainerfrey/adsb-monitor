@@ -2,9 +2,15 @@ server:
   port: 9090
 
 management:
-  context-path: /admin
-  security:
-    enabled: false
+  endpoints:
+    web:
+      base-path: /admin
+      exposure:
+        include: "*"
+
+  endpoint:
+    health:
+      show-details: always
 
 mqtt:
   url: tcp://pi3:1883

@@ -7,7 +7,6 @@ import de.mrfrey.adsbmonitor.connector.data.aircraft.Aircraft;
 import de.mrfrey.adsbmonitor.connector.data.aircraft.AircraftRepository;
 import org.gavaghan.geodesy.Ellipsoid;
 import org.gavaghan.geodesy.GeodeticCalculator;
-import org.gavaghan.geodesy.GeodeticCurve;
 import org.gavaghan.geodesy.GlobalCoordinates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,12 +29,11 @@ public class AwsFlightTransformer {
 
     public AwsData transform( FlightData flightData ) {
         AwsData result = new AwsData( flightData.getFlightId(), flightData.getTimestamp() );
-        Aircraft aircraft = aircraftRepository.findOne( flightData.getIcao().toUpperCase() );
-        if ( aircraft != null ) {
+        aircraftRepository.findById( flightData.getIcao().toUpperCase() ).ifPresent( aircraft -> {
             result.setRegistration( aircraft.getRegistration() );
             result.setModel( aircraft.getModel().getName() );
             result.setOperator( aircraft.getOperator().getName() );
-        }
+        } );
         result.setDistanceFromHome( distanceFromHome( flightData ) );
         return result;
     }

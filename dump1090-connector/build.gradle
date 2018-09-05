@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.7.RELEASE'
+		springBootVersion = '2.0.4.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -12,13 +12,10 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
-jar {
-	baseName = 'dump1090-connector'
-	version = '0.0.1'
-}
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = "1.10"
+targetCompatibility = "1.10"
 
 repositories {
 	mavenCentral()
@@ -30,14 +27,14 @@ repositories {
 dependencies {
 	compile("org.springframework.boot:spring-boot-devtools")
 	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-json')
 	compile('org.springframework.cloud:spring-cloud-starter')
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
 	compile('org.springframework.boot:spring-boot-starter-integration')
 	compile('org.springframework.integration:spring-integration-mqtt')
 	compile('org.springframework.integration:spring-integration-mongodb')
 	compile('org.springframework.integration:spring-integration-http')
-	compile('org.springframework.integration:spring-integration-java-dsl')
-	compile('org.springframework.integration:spring-integration-aws:1.0.0.RELEASE')
+	compile('org.springframework.integration:spring-integration-aws:2.0.0.RELEASE')
 	compile('org.springframework.cloud:spring-cloud-aws-autoconfigure')
 	compile('org.springframework.cloud:spring-cloud-aws-messaging')
 	compile('org.springframework.boot:spring-boot-starter-web')
@@ -49,11 +46,10 @@ dependencies {
 
 dependencyManagement {
 	imports { 
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.RELEASE"
-		mavenBom 'com.amazonaws:aws-java-sdk-bom:1.11.210'
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Finchley.RELEASE"
 	}
 }
 
 springBoot {
-	executable = true
+	buildInfo()
 }
