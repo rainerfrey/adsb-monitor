@@ -1,0 +1,13 @@
+{"flightId":"TUI2784","altitude":25325,"icao":"495175","longitude":7.677401,"heading":209,"latitude":47.70394,"speed":408,"timestamp":1536209742099}
+{"flightId":"TUI2784","altitude":25375,"icao":"495175","longitude":7.674911,"heading":209,"latitude":47.70076,"speed":407,"timestamp":1536209743227}
+{"flightId":"TUI2784","altitude":25475,"icao":"495175","longitude":7.66983,"heading":209,"latitude":47.694351,"speed":407,"timestamp":1536209747322}
+{"flightId":"TUI2784","altitude":25525,"icao":"495175","longitude":7.667152,"heading":209,"latitude":47.69101,"speed":407,"timestamp":1536209749374}
+{"flightId":"TUI2784","altitude":25550,"icao":"495175","longitude":7.665779,"heading":209,"latitude":47.689224,"speed":407,"timestamp":1536209750399}
+{"flightId":"TUI2784","altitude":25600,"icao":"495175","longitude":7.662893,"heading":209,"latitude":47.685645,"speed":407,"timestamp":1536209752454}
+{"flightId":"TUI2784","altitude":25625,"icao":"495175","longitude":7.661659,"heading":209,"latitude":47.684097,"speed":407,"timestamp":1536209753494}
+{"flightId":"TUI2784","altitude":25650,"icao":"495175","longitude":7.660499,"heading":209,"latitude":47.682573,"speed":407,"timestamp":1536209754592}
+{"flightId":"LGL307","altitude":35000,"icao":"4d00f6","longitude":7.728389,"heading":156,"latitude":47.631551,"speed":448,"timestamp":1536209759815}
+{"flightId":"LGL307","altitude":35000,"icao":"4d00f6","longitude":7.730804,"heading":156,"latitude":47.627747,"speed":448,"timestamp":1536209761864}
+{"flightId":"LGL307","altitude":35000,"icao":"4d00f6","longitude":7.731972,"heading":156,"latitude":47.625824,"speed":448,"timestamp":1536209762886}
+{"flightId":"LGL307","altitude":35000,"icao":"4d00f6","longitude":7.733208,"heading":156,"latitude":47.623901,"speed":449,"timestamp":1536209763910}
+{"flightId":"LGL307","altitude":35000,"icao":"4d00f6","longitude":7.734512,"heading":156,"latitude":47.621841,"speed":449,"timestamp":1536209764935}
