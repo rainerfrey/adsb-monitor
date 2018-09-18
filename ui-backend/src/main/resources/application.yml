@@ -2,14 +2,19 @@ server:
   port: 8080
 
 management:
-  context-path: /admin
+  endpoints:
+    web:
+      base-path: /admin
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
 spring:
   data:
     mongodb:
       database: adsbmonitor
-
-spring:
   jackson:
     serialization:
       indent_output: true
-      write_dates_as_timestamps: false

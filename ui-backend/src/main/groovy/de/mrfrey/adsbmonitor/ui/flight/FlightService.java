@@ -33,7 +33,7 @@ public class FlightService {
                         ))
                 );
         return data.values().stream()
-                .map(flight -> flight.addAircraft(aircraftRepository.findOne(flight.getIcao().toUpperCase())))
+                .map(flight -> flight.addAircraft(aircraftRepository.findById(flight.getIcao().toUpperCase())))
                 .sorted(comparing(FlightCourse::getLastTimestamp).reversed());
     }
 }

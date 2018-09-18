@@ -28,14 +28,14 @@ class FlightCourse {
         positions.add(position)
     }
 
-    public void updateFromPosition(Position position) {
+    void updateFromPosition(Position position) {
         this.altitude = position.altitude
         this.speed = position.speed
         this.heading = position.heading
         this.lastTimestamp = position.timestamp
     }
 
-    public FlightCourse addAll(FlightCourse other) {
+    FlightCourse addAll(FlightCourse other) {
         if (other.empty)
             return this
         if (empty)
@@ -47,12 +47,14 @@ class FlightCourse {
         return this
     }
 
-    public boolean isEmpty() {
+    boolean isEmpty() {
         return flightId == null || positions.empty
     }
 
-    FlightCourse addAircraft(Aircraft aircraft) {
-        this.aircraft = aircraft
+    FlightCourse addAircraft(Optional<Aircraft> aircraft) {
+        aircraft.ifPresent {
+            this.aircraft = it
+        }
         this
     }
 }
