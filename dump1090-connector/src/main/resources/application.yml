@@ -25,7 +25,7 @@ adsb:
     inbound-topic: adsb/input
     outbound-topic: adsb/output
   aws:
-    enabled: true
+    enabled: false
     topic: ""
   home:
     latitude: 47.859541
