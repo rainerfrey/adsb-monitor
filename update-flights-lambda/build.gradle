@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id "io.spring.dependency-management" version "1.0.5.RELEASE"
+}
+
+group 'de.mrfrey.adsb.aws'
+version '0.2.0'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'com.amazonaws:aws-java-sdk-bom:1.11.336'
+        mavenBom 'org.apache.logging.log4j:log4j-bom:2.11.1'
+    }
+}
+
+dependencies {
+    compile group: 'com.amazonaws', name: 'aws-lambda-java-core', version: '1.1.0'
+    compile group: 'com.amazonaws', name: 'aws-lambda-java-events', version: '2.0'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-dynamodb'
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.9.6'
+    compile "org.apache.logging.log4j:log4j-api"
+    runtime "org.apache.logging.log4j:log4j-core"
+    runtime "com.amazonaws:aws-lambda-java-log4j2:1.0.0"
+}
+
+task buildZip(type: Zip) {
+    from compileJava
+    from processResources
+    into('lib') {
+        from configurations.runtime
+    }
+}
+
+build.dependsOn buildZip
