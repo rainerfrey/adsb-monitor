@@ -6,8 +6,8 @@ plugins {
 group 'de.mrfrey.adsb.aws'
 version '0.2.0'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 
 repositories {
     mavenCentral()
