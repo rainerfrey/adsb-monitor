@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id "io.spring.dependency-management" version "1.0.5.RELEASE"
+}
+
+group 'de.mrfrey.adsb.alexa'
+version '0.2.0'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'com.amazonaws:aws-java-sdk-bom:1.11.336'
+    }
+}
+
+dependencies {
+    compile "com.amazon.alexa:ask-sdk:2.5.5"
+    compile "com.amazonaws:aws-java-sdk-lambda"
+    runtime "com.amazonaws:aws-lambda-java-log4j2:1.0.0"
+}
+
+task buildZip(type: Zip) {
+    from compileJava
+    from processResources
+    into('lib') {
+        from configurations.runtime
+    }
+}
+
+build.dependsOn buildZip

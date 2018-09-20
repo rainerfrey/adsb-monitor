@@ -1,2 +1,2 @@
 rootProject.name = 'adsb-monitor'
-include 'dump1090-connector', 'ui-backend', 'get-flights-lambda', 'update-flights-lambda'
+include 'dump1090-connector', 'ui-backend', 'get-flights-lambda', 'update-flights-lambda', 'flight-monitor-skill'
