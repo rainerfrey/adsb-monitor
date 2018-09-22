@@ -1,8 +1,10 @@
-import Ember from "ember";
+import { later, scheduleOnce } from '@ember/runloop';
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 
-export default Ember.Route.extend({
-  ajax: Ember.inject.service(),
-  settings: Ember.inject.service(),
+export default Route.extend({
+  ajax: service(),
+  settings: service(),
   init() {
     this._super(...arguments);
     this.get("settings").on("startLiveMonitoring", this, this.reloadModel);
@@ -19,7 +21,7 @@ export default Ember.Route.extend({
   reloadModel() {
     let live = this.get("settings.live");
     if(live === true) {
-      Ember.run.later(()=>Ember.run.scheduleOnce("actions", this, "doReload"), 3000);
+      later(()=>scheduleOnce("actions", this, "doReload"), 3000);
     }
   }
 });

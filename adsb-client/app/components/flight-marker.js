@@ -1,8 +1,7 @@
+import { observer } from '@ember/object';
+import { run } from '@ember/runloop';
 import GMapMarkerComponent from 'ember-g-map/components/g-map-marker';
 import planeIcons from 'adsb-client/utils/plane-icon';
-import Ember from 'ember';
-
-const { observer, run } = Ember;
 
 export default GMapMarkerComponent.extend({
   selected: false,

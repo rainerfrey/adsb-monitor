@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import Evented from '@ember/object/evented';
+import Service from '@ember/service';
 import ENV from "adsb-client/config/environment";
 
-export default Ember.Service.extend(Ember.Evented, {
+export default Service.extend(Evented, {
   timeframe: ENV.adsb.timeframe,
   live: ENV.adsb.liveMonitoring,
 

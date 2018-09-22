@@ -1,6 +1,5 @@
-import Ember from "ember";
+import { get } from '@ember/object';
 import HalSerializer from "ember-data-hal-9000/serializer";
-const {get} = Ember;
 
 export default HalSerializer.extend({
   serialize(snapshot, options){

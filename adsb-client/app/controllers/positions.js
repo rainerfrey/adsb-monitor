@@ -1,15 +1,17 @@
-import Ember from 'ember';
+import { alias } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
+import Controller from '@ember/controller';
 import ENV from "adsb-client/config/environment";
 
-export default Ember.Controller.extend({
-  map: Ember.inject.service(),
+export default Controller.extend({
+  map: service(),
   home: ENV.adsb.home,
   homeIcon: 'https://mt0.google.com/vt/icon/name=icons/spotlight/home_S_8x.png&scale=1.0',
   mapOptions: function() {
     return {mapTypeId: this.get("map.defaultMapType")};
   }.property(),
   currentFlight: null,
-  lastTimestamp: Ember.computed.alias('model.meta.lastTimestamp'),
+  lastTimestamp: alias('model.meta.lastTimestamp'),
   actions: {
     selectFlight: function(flight) {
       this.set("currentFlight", flight);

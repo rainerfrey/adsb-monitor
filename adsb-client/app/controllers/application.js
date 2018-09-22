@@ -1,7 +1,9 @@
-import Ember from 'ember';
+import { isEmpty } from '@ember/utils';
+import { inject as service } from '@ember/service';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
-  settings: Ember.inject.service(),
+export default Controller.extend({
+  settings: service(),
   showSettings: false,
 
   actions: {
@@ -9,10 +11,10 @@ export default Ember.Controller.extend({
       this.toggleProperty("showSettings");
     },
     applySettings(timeframe, liveMonitoring) {
-      if(!Ember.isEmpty(timeframe)) {
+      if(!isEmpty(timeframe)) {
         this.set("settings.timeframe", timeframe);
       }
-      if(!Ember.isEmpty(liveMonitoring)) {
+      if(!isEmpty(liveMonitoring)) {
         this.get("settings").setLiveMonitoring(liveMonitoring);
       }
     }

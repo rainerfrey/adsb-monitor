@@ -1,12 +1,15 @@
-import Ember from "ember";
+import { alias } from '@ember/object/computed';
+import Component from '@ember/component';
+import { isPresent, isEmpty } from '@ember/utils';
+import { observer } from '@ember/object';
+import { run } from '@ember/runloop';
+import { assert } from '@ember/debug';
 import GMapComponent from 'ember-g-map/components/g-map';
 
-const {isEmpty, isPresent, observer, run, computed, assert} = Ember;
-
-const GMapPolyLineComponent = Ember.Component.extend({
+const GMapPolyLineComponent = Component.extend({
   selected: true,
   positionalParams: ['mapContext'],
-  map: computed.alias('mapContext.map'),
+  map: alias('mapContext.map'),
 
   init() {
     this._super(...arguments);
