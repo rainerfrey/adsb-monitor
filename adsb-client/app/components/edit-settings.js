@@ -10,8 +10,8 @@ export default Component.extend({
   },
 
   initValues: function () {
-    this.set("myLive", this.get("liveMonitoring"));
-    this.set("myTimeframe", this.get("timeframe"));
+    this.set("myLive", this.liveMonitoring);
+    this.set("myTimeframe", this.timeframe);
   },
 
   didReceiveAttrs() {
@@ -21,8 +21,8 @@ export default Component.extend({
 
   actions: {
     applySettings() {
-      this.get("apply")(this.get("myTimeframe"), this.get("myLive"));
-      this.get("close")();
+      this.apply(this.myTimeframe, this.myLive);
+      this.close();
     }
   }
 });

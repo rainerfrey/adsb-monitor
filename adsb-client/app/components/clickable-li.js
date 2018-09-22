@@ -4,6 +4,6 @@ export default Component.extend({
   tagName: 'button',
   classNames: 'button',
   click: function() {
-    this.get("onClick")();
+    this.onClick();
   }
 });

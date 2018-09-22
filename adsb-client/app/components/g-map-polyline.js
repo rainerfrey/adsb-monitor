@@ -13,13 +13,13 @@ const GMapPolyLineComponent = Component.extend({
 
   init() {
     this._super(...arguments);
-    let mapContext = this.get('mapContext');
+    let mapContext = this.mapContext;
     assert('Must be inside {{#g-map}} component with context set', mapContext instanceof GMapComponent);
   },
 
   didInsertElement() {
     this._super();
-    if (isEmpty(this.get('line'))) {
+    if (isEmpty(this.line)) {
       let line = new google.maps.Polyline(this.getPolyLineOptions());
       this.set('line', line);
     }
@@ -28,15 +28,15 @@ const GMapPolyLineComponent = Component.extend({
   },
 
   willDestroyElement() {
-    let line = this.get('line');
+    let line = this.line;
     if (isPresent(line)) {
       line.setMap(null);
     }
   },
 
   setMap() {
-    let map = this.get('map');
-    let line = this.get('line');
+    let map = this.map;
+    let line = this.line;
 
     if (isPresent(line) && isPresent(map)) {
       line.setMap(map);
@@ -44,15 +44,15 @@ const GMapPolyLineComponent = Component.extend({
   },
 
   unsetFromMap() {
-    let line = this.get('line');
+    let line = this.line;
     if(isPresent(line)) {
       line.setMap(null);
     }
   },
 
   setPositions() {
-    let line = this.get('line');
-    let positions = this.get("positions");
+    let line = this.line;
+    let positions = this.positions;
     if (isPresent(line) && isPresent(positions)) {
       let points = positions.map(position => new google.maps.LatLng(position.latitude, position.longitude));
       line.setPath(points);
@@ -60,7 +60,7 @@ const GMapPolyLineComponent = Component.extend({
   },
 
   getPolyLineOptions() {
-    let selected = this.get("selected");
+    let selected = this.selected;
     let weight = selected ? 2 : 1;
     // let color = selected ? '#FF8000' : '#FF0000';
     let color = '#FF8000';
@@ -73,7 +73,7 @@ const GMapPolyLineComponent = Component.extend({
   },
 
   setLineOptions() {
-    let line = this.get('line');
+    let line = this.line;
     if(isPresent(line)) {
       line.setOptions(this.getPolyLineOptions());
     }

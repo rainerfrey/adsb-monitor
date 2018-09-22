@@ -24,7 +24,7 @@ module.exports = function(environment) {
     },
 
     'g-map': {
-      key: 'AIzaSyDN77dL_9QXOqlcmtJTnAwkKaOHaH_QYMA'
+      key: ''
     },
     moment: {
       // allowEmpty: true

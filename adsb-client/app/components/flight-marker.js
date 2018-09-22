@@ -10,8 +10,8 @@ export default GMapMarkerComponent.extend({
     this.updateIcon();
   },
   getIcon() {
-    let heading = this.get('heading');
-    let selected = this.get('selected');
+    let heading = this.heading;
+    let selected = this.selected;
     let rotation = heading ? heading * 1.0 : 0.0;
     // let color = selected ? '#FF8000' : 'black';
     let color = '#FF8000';

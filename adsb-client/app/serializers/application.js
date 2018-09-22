@@ -9,7 +9,7 @@ export default HalSerializer.extend({
       let id = snapshot.id;
 
       if (id) {
-        json[get(this, 'primaryKey')] = id;
+        json[this.primaryKey] = id;
       }
     }
 

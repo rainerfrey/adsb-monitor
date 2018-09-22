@@ -7,7 +7,7 @@ export default Route.extend({
   settings: service(),
   init() {
     this._super(...arguments);
-    this.get("settings").on("startLiveMonitoring", this, this.reloadModel);
+    this.settings.on("startLiveMonitoring", this, this.reloadModel);
   },
   model() {
     return this.store.query('position', {from: this.get("settings.timeframe")});

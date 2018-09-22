@@ -25,7 +25,7 @@
     "ember-cli": "~3.4.2",
     "ember-cli-app-version": "^3.2.0",
     "ember-cli-babel": "^6.16.0",
-    "ember-cli-bootstrap-sassy": "0.5.5",
+    "ember-cli-bootstrap-sassy": "0.5.8",
     "ember-cli-dependency-checker": "^3.0.0",
     "ember-cli-eslint": "^4.2.3",
     "ember-cli-htmlbars": "^3.0.0",
@@ -34,6 +34,7 @@
     "ember-cli-moment-shim": "3.0.1",
     "ember-cli-qunit": "^4.3.2",
     "ember-cli-sass": "6.1.1",
+    "ember-cli-shims": "^1.2.0",
     "ember-cli-sockjs": "1.0.0",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-stomp": "0.0.6",
@@ -58,8 +59,5 @@
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
-  },
-  "dependencies": {
-    "node-sass": "^4.9.3"
   }
 }

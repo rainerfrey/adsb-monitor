@@ -15,7 +15,7 @@ export default Controller.extend({
         this.set("settings.timeframe", timeframe);
       }
       if(!isEmpty(liveMonitoring)) {
-        this.get("settings").setLiveMonitoring(liveMonitoring);
+        this.settings.setLiveMonitoring(liveMonitoring);
       }
     }
   }
