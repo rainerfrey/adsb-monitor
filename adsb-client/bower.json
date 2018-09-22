@@ -1,6 +1,0 @@
-{
-  "name": "adsb-client",
-  "dependencies": {
-    "sockjs-client": "^1.1.2"
-  }
-}
