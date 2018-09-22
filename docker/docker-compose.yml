@@ -1,0 +1,53 @@
+version: '2'
+services:
+  mongodb:
+    build: ./rpi-mongodb
+    image: rfy/rpi-mongodb
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/var/lib/mongodb
+  mosquitto:
+    build: ./rpi-mosquitto
+    image: rfy/rpi-mosquitto
+    container_name: mosquitto
+    ports:
+      - "1883:1883"
+  dump1090:
+    build: ./rpi-dump1090
+    image: rfy/rpi-dump1090
+    container_name: dump1090
+    command: ["--lat", "47.859580", "--lon", "7.693811", "--mqtt", "--mqtt-url", "tcp://mosquitto:1883", "--mqtt-clientid", "pi3dump1090", "--mqtt-topic", "adsb/input"]
+    devices:
+      - "/dev/bus/usb"
+    ports:
+      - "7070:7070"
+    depends_on: ["mosquitto"]
+  adsb-connector:
+    build: ./rpi-adsb-connector
+    image: rfy/rpi-adsb-connector
+    container_name: adsb-connector
+    ports:
+      - "9090:9090"
+    command:
+      - "--spring.data.mongodb.host=mongodb"
+      - "--mqtt.url=tcp://mosquitto:1883"
+    depends_on: ["mosquitto", "mongodb"]
+  adsb-uibackend:
+    build: ./rpi-adsb-uibackend
+    image: rfy/rpi-adsb-uibackend
+    container_name: adsb-uibackend
+    ports:
+      - "8080:8080"
+    command:
+      - "--spring.data.mongodb.host=mongodb"
+    depends_on: ["mongodb"]
+  adsb-ui:
+    build: ./rpi-adsb-ui
+    image: rfy/rpi-adsb-ui
+    container_name: adsb-ui
+    ports:
+      - "80:80"
+volumes:
+  mongodata:

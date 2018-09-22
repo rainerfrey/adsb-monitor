@@ -1,0 +1,7 @@
+FROM arm32v7/openjdk:10-slim
+
+COPY release/ui-backend.jar /data/ui-backend.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-Xmx64m", "-jar", "/data/adsb-ui-backend.jar"] 
