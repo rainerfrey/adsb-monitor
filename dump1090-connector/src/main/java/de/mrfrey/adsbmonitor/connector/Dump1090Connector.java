@@ -1,6 +1,5 @@
 package de.mrfrey.adsbmonitor.connector;
 
-import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.AmazonSNSAsync;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.mrfrey.adsbmonitor.connector.aggregate.LatestOnlyAggregator;
@@ -10,6 +9,7 @@ import de.mrfrey.adsbmonitor.connector.data.AwsData;
 import de.mrfrey.adsbmonitor.connector.data.FlightData;
 import de.mrfrey.adsbmonitor.connector.flow.AwsFlightTransformer;
 import de.mrfrey.adsbmonitor.connector.flow.DuplicateFilter;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -69,9 +69,6 @@ public class Dump1090Connector {
     @Autowired
     private ObjectMapper mapper;
 
-    @Autowired
-    private AmazonSNS amazonSNS;
-
     private SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
 
     @Bean
@@ -83,9 +80,10 @@ public class Dump1090Connector {
 
     @Bean
     public MqttPahoClientFactory mqttClientFactory() {
+        MqttConnectOptions options = new MqttConnectOptions();
+        options.setServerURIs( new String[]{ mqttUrl } );
         DefaultMqttPahoClientFactory clientFactory = new DefaultMqttPahoClientFactory();
-        clientFactory.setServerURIs( mqttUrl );
-        clientFactory.setConnectionTimeout( 5000 );
+        clientFactory.setConnectionOptions( options );
         return clientFactory;
     }
 
@@ -176,6 +174,7 @@ public class Dump1090Connector {
                                                                  .subscribe( f -> f
                                                                      .transform( FlightData::toMap )
                                                                      .transform( toJson() )
+                                                                     .log()
                                                                      .handle( outbound() )
                                                                  )
                                                                  .subscribe( f -> f.handle( System.out::println ) );
