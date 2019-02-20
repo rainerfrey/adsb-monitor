@@ -1,4 +1,4 @@
-FROM arm32v7/openjdk:10-slim
+FROM arm32v7/openjdk:11-slim
 
 COPY release/dump1090-connector.jar /data/dump1090-connector.jar
 

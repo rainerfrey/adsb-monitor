@@ -1,4 +1,4 @@
-FROM arm32v7/openjdk:10-slim
+FROM arm32v7/openjdk:11-slim
 
 COPY release/ui-backend.jar /data/ui-backend.jar
 

@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.4.RELEASE'
+		springBootVersion = '2.1.3.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -14,8 +14,8 @@ apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-sourceCompatibility = "1.10"
-targetCompatibility = "1.10"
+sourceCompatibility = "11"
+targetCompatibility = "11"
 
 repositories {
 	mavenCentral()
@@ -36,7 +36,7 @@ dependencies {
 	compile('org.springframework.cloud:spring-cloud-aws-autoconfigure')
 	compile('org.springframework.cloud:spring-cloud-aws-messaging')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.apache.commons:commons-lang3:3.4')
+	compile('org.apache.commons:commons-lang3')
 	compile('org.jolokia:jolokia-core')
 	compile('org.gavaghan:geodesy:1.1.3')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
@@ -44,7 +44,7 @@ dependencies {
 
 dependencyManagement {
 	imports { 
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Finchley.RELEASE"
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Greenwich.RELEASE"
 	}
 }
 
