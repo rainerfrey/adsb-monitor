@@ -1,4 +1,4 @@
-FROM rfy/rpi-mqtt-client
+FROM rpi-mqtt-client_main
 
 RUN apt-get update && apt-get install -y --no-install-recommends librtlsdr-dev libusb-1.0-0-dev
 

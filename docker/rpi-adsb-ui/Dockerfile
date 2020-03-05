@@ -1,4 +1,4 @@
 FROM akkerman/rpi-nginx
 
-COPY release /var/www/html/
+ADD release.tar /var/www/html/
  

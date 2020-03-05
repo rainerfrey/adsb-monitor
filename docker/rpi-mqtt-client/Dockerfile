@@ -1,4 +1,4 @@
-FROM rfy/rpi-build-env
+FROM rpi-build-env_main
 
 RUN apt-get update && apt-get install -y --no-install-recommends libssl-dev
 

@@ -1,6 +1,6 @@
-FROM arm32v7/openjdk:11-slim
+FROM adoptopenjdk:13-jdk-hotspot
 
-COPY release/dump1090-connector.jar /data/dump1090-connector.jar
+COPY dump1090-connector.jar /data/dump1090-connector.jar
 
 EXPOSE 9090
 
