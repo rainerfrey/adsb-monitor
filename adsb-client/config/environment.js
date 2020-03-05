@@ -61,7 +61,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.adsb.server = "http://pi3:8080";
+    ENV.adsb.server = "http://pi4:8080";
   }
 
   return ENV;
