@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.1.3.RELEASE'
+		springBootVersion = '2.2.5.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -40,7 +40,7 @@ dependencies {
 }
 
 dependencyManagement {
-	imports { 
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Greenwich.RELEASE"
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR2"
 	}
 }

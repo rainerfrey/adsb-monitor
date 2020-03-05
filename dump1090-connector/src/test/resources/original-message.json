@@ -1,0 +1,114 @@
+{
+    "now" : 1583356611.0,
+    "messages" : 98327,
+    "aircraft" : [
+        {
+            "hex":"04014e",
+            "squawk":"5627",
+            "flight":"ETH705  ",
+            "lat":47.821066,"
+            lon":7.700360,
+            "nucp":7,
+            "seen_pos":0.3,
+            "altitude":39000,
+            "vert_rate":0,
+            "track":122,
+            "speed":565,
+            "category":"A5",
+            "messages":1005,
+            "seen":0.0,
+            "rssi":-29.4
+        },
+        {
+            "hex":"3c661a",
+            "squawk":"1000",
+            "flight":"DLH44J  ",
+            "lat":47.639279,
+            "lon":7.650921,
+            "nucp":0,
+            "seen_pos":2.5,"
+            altitude":33000,
+            "vert_rate":128,
+            "track":202,
+            "speed":486,
+            "category":"A0",
+            "messages":697,
+            "seen":2.3,
+            "rssi":-32.3
+        },
+        {
+            "hex":"4b1a41",
+            "squawk":"1000",
+            "flight":"EZS817K ",
+            "altitude":3800,
+            "vert_rate":-896,
+            "track":154,"
+            speed":165,
+            "category":"A3",
+            "messages":29,
+            "seen":90.1,
+            "rssi":-33.5
+        },
+        {
+            "hex":"406a02",
+            "squawk":"1176",
+            "flight":"BAW544K ",
+            "lat":47.606689,
+            "lon":7.740143,
+            "nucp":7,"
+            seen_pos":15.3,
+            "altitude":38975,
+            "vert_rate":0,
+            "track":124,
+            "speed":517,
+            "category":"A3",
+            "messages":2912,
+            "seen":2.8,
+            "rssi":-34.2
+        },
+        {
+            "hex":"3c66ac",
+            "squawk":"0630",
+            "flight":"DLH1330 ",
+            "altitude":35525,
+            "vert_rate":576,
+            "track":204,
+            "speed":476,
+            "category":"A3",
+            "messages":1323,
+            "seen":142.7,
+            "rssi":-34.3
+        },
+        {
+            "hex":"4b19f7",
+            "squawk":"2155",
+            "flight":"SWR40C  ",
+            "lat":47.739599,
+            "lon":7.869380,
+            "nucp":7,
+            "seen_pos":48.2,
+            "altitude":20175,
+            "vert_rate":-1024,
+            "track":97,
+            "speed":433,
+            "category":"A3",
+            "messages":1271,
+            "seen":37.9,
+            "rssi":-34.0
+        },
+        {
+            "hex":"4b16ba",
+            "squawk":"2201",
+            "flight":"SWR339  ",
+            "altitude":16250,
+            "vert_rate":-1472,
+            "track":87,
+            "speed":354,
+            "category":"A0",
+            "messages":329,
+            "seen":79.6,
+            "rssi":-34.3
+        }
+    ]
+}
+

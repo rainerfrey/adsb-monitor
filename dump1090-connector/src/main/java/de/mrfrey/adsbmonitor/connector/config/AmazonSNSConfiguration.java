@@ -10,11 +10,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AmazonSNSConfiguration {
-    @Autowired( required = false )
-    private AWSCredentialsProvider awsCredentialsProvider;
+    private final AWSCredentialsProvider awsCredentialsProvider;
 
-    @Autowired( required = false )
-    private RegionProvider regionProvider;
+    private final RegionProvider regionProvider;
+
+    public AmazonSNSConfiguration( @Autowired(required = false) AWSCredentialsProvider awsCredentialsProvider, @Autowired(required = false) RegionProvider regionProvider ) {
+        this.awsCredentialsProvider = awsCredentialsProvider;
+        this.regionProvider = regionProvider;
+    }
 
     @Bean
     public AmazonWebserviceClientFactoryBean<AmazonSNSAsyncClient> amazonSNS() {

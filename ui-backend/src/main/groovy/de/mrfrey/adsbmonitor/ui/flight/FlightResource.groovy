@@ -2,11 +2,11 @@ package de.mrfrey.adsbmonitor.ui.flight
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import de.mrfrey.adsbmonitor.ui.aircraft.Aircraft
-import org.springframework.hateoas.ResourceSupport
-import org.springframework.hateoas.core.Relation
+import org.springframework.hateoas.RepresentationModel
+import org.springframework.hateoas.server.core.Relation
 
 @Relation(collectionRelation = "flights")
-class FlightResource extends ResourceSupport {
+class FlightResource extends RepresentationModel {
     @JsonProperty("id")
     String flightId
     String icao

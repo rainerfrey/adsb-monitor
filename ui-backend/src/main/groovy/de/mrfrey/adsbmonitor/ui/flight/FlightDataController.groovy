@@ -1,8 +1,8 @@
 package de.mrfrey.adsbmonitor.ui.flight
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.hateoas.Resources
-import org.springframework.hateoas.core.EmbeddedWrappers
+import org.springframework.hateoas.CollectionModel
+import org.springframework.hateoas.server.core.EmbeddedWrappers
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.RequestMapping
@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toList
 import static org.springframework.web.bind.annotation.RequestMethod.GET
 
 @RestController
-@RequestMapping(value = "/positions", produces = [MediaType.APPLICATION_JSON_VALUE,"application/hal+json"])
+@RequestMapping(value = "/positions", produces = [MediaType.APPLICATION_JSON_VALUE, "application/hal+json"])
 @CrossOrigin
 class FlightDataController {
     @Autowired
@@ -23,7 +23,7 @@ class FlightDataController {
     FlightResourceAssembler flightResourceAssembler
 
     @RequestMapping(method = GET)
-    Resources<FlightResource> getPositionData(
+    CollectionModel<FlightResource> getPositionData(
             @RequestParam(value = "from", defaultValue = "15") Integer fromMinutesAgo,
             @RequestParam(value = "to", required = false) Integer toMinutesAgo) {
 
@@ -31,13 +31,12 @@ class FlightDataController {
         Long to = timestampFromMinutes(toMinutesAgo)
 
         def data = flightService.getData(from, to)
-        def positions = data.map({ flightResourceAssembler.toResource(it) }).collect(toList())
+        def positions = data.map({ flightResourceAssembler.toModel(it) }).collect(toList())
         def timestamp
-        if(positions.isEmpty()) {
+        if (positions.isEmpty()) {
             positions = Collections.singletonList(new EmbeddedWrappers(false).emptyCollectionOf(FlightResource))
             timestamp = new Date(from)
-        }
-        else {
+        } else {
             timestamp = positions.first().lastTimestamp
         }
 

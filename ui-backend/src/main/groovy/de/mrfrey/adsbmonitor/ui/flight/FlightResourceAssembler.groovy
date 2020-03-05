@@ -1,13 +1,14 @@
 package de.mrfrey.adsbmonitor.ui.flight
 
-import org.springframework.hateoas.ResourceAssembler
-import org.springframework.hateoas.mvc.ControllerLinkBuilder
+
+import org.springframework.hateoas.server.RepresentationModelAssembler
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
 import org.springframework.stereotype.Component
 
 @Component
-class FlightResourceAssembler implements ResourceAssembler<FlightCourse, FlightResource> {
+class FlightResourceAssembler implements RepresentationModelAssembler<FlightCourse, FlightResource> {
     @Override
-    FlightResource toResource(FlightCourse flight) {
+    FlightResource toModel(FlightCourse flight) {
         def resource = new FlightResource()
         resource.flightId = flight.flightId
         resource.icao = flight.icao
@@ -19,7 +20,7 @@ class FlightResourceAssembler implements ResourceAssembler<FlightCourse, FlightR
         flight.positions.each {
             resource.positions << new Point(latitude: it.latitude, longitude: it.longitude, altitude: it.altitude, timestamp: new Date(it.timestamp))
         }
-        resource.add(ControllerLinkBuilder.linkTo(FlightDataController).slash(flight.flightId).withSelfRel())
+        resource.add(WebMvcLinkBuilder.linkTo(FlightDataController).slash(flight.flightId).withSelfRel())
         return resource
     }
 }

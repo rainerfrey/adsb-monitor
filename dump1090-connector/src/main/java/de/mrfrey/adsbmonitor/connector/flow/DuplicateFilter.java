@@ -11,8 +11,7 @@ public class DuplicateFilter {
     private Map<String, FlightData> cache = Collections.synchronizedMap(new LRUCache<>(200));
 
     public boolean duplicate(FlightData data) {
-        FlightData last = cache.get(data.getFlightId());
-        cache.put(data.getFlightId(), data);
+        FlightData last = cache.put(data.getFlightId(), data);
         return data.equals(last);
     }
 }

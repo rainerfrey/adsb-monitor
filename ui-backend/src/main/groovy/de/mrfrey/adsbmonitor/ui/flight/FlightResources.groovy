@@ -1,9 +1,9 @@
 package de.mrfrey.adsbmonitor.ui.flight
 
+import org.springframework.hateoas.CollectionModel
 import org.springframework.hateoas.Link
-import org.springframework.hateoas.Resources
 
-class FlightResources extends Resources<FlightResource> {
+class FlightResources extends CollectionModel<FlightResource> {
     FlightResources(Iterable<FlightResource> content, Link... links) {
         super(content, links)
     }

@@ -10,7 +10,6 @@ import de.mrfrey.adsbmonitor.connector.data.FlightData;
 import de.mrfrey.adsbmonitor.connector.flow.AwsFlightTransformer;
 import de.mrfrey.adsbmonitor.connector.flow.DuplicateFilter;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -60,16 +59,20 @@ public class Dump1090Connector {
     @Value( "${mqtt.subscribe.clientid}" )
     private String mqttSubscriberClientId;
 
-    @Autowired
-    private AdsbConfiguration configuration;
+    private final AdsbConfiguration configuration;
 
-    @Autowired
-    private MongoDbFactory mongoDbFactory;
+    private final MongoDbFactory mongoDbFactory;
 
-    @Autowired
-    private ObjectMapper mapper;
+    private final ObjectMapper mapper;
 
-    private SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
+    private final SpelExpressionParser spelExpressionParser;
+
+    public Dump1090Connector( AdsbConfiguration configuration, MongoDbFactory mongoDbFactory, ObjectMapper mapper ) {
+        this.configuration = configuration;
+        this.mongoDbFactory = mongoDbFactory;
+        this.mapper = mapper;
+        this.spelExpressionParser = new SpelExpressionParser();
+    }
 
     @Bean
     public MessageHandler mongoPersistence() {
@@ -102,7 +105,7 @@ public class Dump1090Connector {
         final String defaultTopic = configuration.getMqtt().getOutboundTopic();
         MqttPahoMessageHandler handler = new MqttPahoMessageHandler( mqttPublisherClientId, mqttClientFactory() ) {
             @Override
-            protected void handleMessageInternal( Message<?> message ) throws Exception {
+            protected void handleMessageInternal( Message<?> message ) {
                 Object mqttMessage = this.getConverter().fromMessage( message, Object.class );
                 this.publish( defaultTopic, mqttMessage, message );
 
@@ -143,7 +146,7 @@ public class Dump1090Connector {
 
 
     @Bean
-    public MessageHandler snsMessageHandler( AmazonSNSAsync amazonSNS ) {
+    public SnsMessageHandler snsMessageHandler( AmazonSNSAsync amazonSNS ) {
         SnsMessageHandler handler = new SnsMessageHandler( amazonSNS );
         handler.setTopicArn( configuration.getAws().getTopic() );
         String bodyExpression = "T(org.springframework.integration.aws.support.SnsBodyBuilder).withDefault(payload)";

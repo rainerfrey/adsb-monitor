@@ -10,8 +10,8 @@ import java.util.Map;
 public class LatestOnlyAggregator extends AbstractAggregatingMessageGroupProcessor {
     @Override
     protected Object aggregatePayloads(MessageGroup group, Map<String, Object> defaultHeaders) {
-        return group.getMessages().stream().sorted(
-                Comparator.<Message<?>, Long>comparing(m -> m.getHeaders().getTimestamp()).reversed()
-        ).findFirst().get().getPayload();
+        return group.getMessages().stream()
+                    .sorted( Comparator.<Message<?>, Long>comparing(m -> m.getHeaders().getTimestamp()).reversed() )
+                    .findFirst().get().getPayload();
     }
 }
