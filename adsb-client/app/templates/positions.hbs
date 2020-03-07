@@ -8,7 +8,7 @@
         {{g-map-marker map lat=home.lat lng=home.lng icon=homeIcon}}
         {{#each model as |flight|}}
           {{#flight-marker map group='flights' lat=flight.positions.lastObject.latitude lng=flight.positions.lastObject.longitude title=flight.flightId heading=flight.heading selected=(eq flight currentFlight) onClick=(action "selectFlight" flight) as |markerContext|}}
-            {{#g-map-infowindow markerContext openOn="mouseover" closeOn="mouseout"}}{{info-window flight=flight}}{{/g-map-infowindow}}
+            {{#g-map-infowindow markerContext openOn="mouseover" closeOn="mouseout"}}<InfoWindow @flight={{flight}} />{{/g-map-infowindow}}
           {{/flight-marker}}
           {{g-map-polyline map selected=(eq flight currentFlight) positions=flight.positions}}
         {{/each}}
@@ -16,7 +16,7 @@
 {{/if}}
     </div>
     <div class="col-md-3">
-      {{current-flight flight=currentFlight}}
-      {{flight-list flights=model currentFlight=currentFlight lastTimestamp=lastTimestamp selectFlight=(action 'selectFlight')}}
+      <CurrentFlight @flight={{currentFlight}} />
+      <FlightList @flights={{model}} @currentFlight={{currentFlight}} @lastTimestamp={{lastTimestamp}} @selectFlight={{action "selectFlight"}} />
     </div>
 </div>

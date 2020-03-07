@@ -4,7 +4,7 @@
     </div>
     <ul class="list-group scrollable">
       {{#each flights as |flight|}}
-        {{flight-list-entry flight=flight selected=(eq flight currentFlight) onSelect=selectFlight}}
+        <FlightListEntry @flight={{flight}} @selected={{eq flight currentFlight}} @onSelect={{selectFlight}} />
       {{/each}}
     </ul>
 </div>

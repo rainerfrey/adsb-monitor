@@ -14,7 +14,7 @@
         <li class="list-group-item">
             <a href="http://planefinder.net/flight/{{flight.flightId}}" target="_blank">Planefinder</a> - <a
                 href="http://fr24.com/{{flight.flightId}}" target="_blank">Flightradar 24</a><br/>
-          {{airframe-link flight=flight}}
+          <AirframeLink @flight={{flight}} />
           {{#if flight.aircraft}}
               <a href="http://www.planepictures.net/v3/search.php?stype=reg&srng=1&srch={{flight.aircraft.registration}}"
                  target="_blank">Pictures (Planepictures)</a>

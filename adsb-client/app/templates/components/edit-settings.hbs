@@ -2,13 +2,13 @@
     <div class="form-group">
         <label for="timeframe">Data from last</label>
         <div class="input-group">
-            {{input type="number" value=myTimeframe id="timeframe" class="form-control"}}
+            <Input @type="number" @value={{myTimeframe}} @id="timeframe" class="form-control" />
             <span class="input-group-addon">min.</span>
         </div>
     </div>
     <div class="checkbox">
         <label>
-            {{input type="checkbox" checked=myLive}}Live Monitoring
+            <Input @type="checkbox" @checked={{myLive}} />Live Monitoring
         </label>
     </div>
     <div class="btn-group">

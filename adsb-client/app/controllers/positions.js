@@ -1,3 +1,4 @@
+import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
@@ -7,9 +8,9 @@ export default Controller.extend({
   map: service(),
   home: ENV.adsb.home,
   homeIcon: 'https://mt0.google.com/vt/icon/name=icons/spotlight/home_S_8x.png&scale=1.0',
-  mapOptions: function() {
+  mapOptions: computed(function() {
     return {mapTypeId: this.get("map.defaultMapType")};
-  }.property(),
+  }),
   currentFlight: null,
   lastTimestamp: alias('model.meta.lastTimestamp'),
   actions: {

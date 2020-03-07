@@ -1,27 +1,24 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">ADS-B Monitor</a>
-        </div>
-        <div class="collapse navbar-collapse navbar-right navbar-inverse" id="navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li id="settings-button"><a onclick={{action "toggleSettings" preventDefault=true}}><span class="glyphicon glyphicon-plane" style="font-size:1.3em;"></span></a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-{{#if showSettings}}
-  {{#tether-dialog
-  close=(action "toggleSettings")
-  attachment="top right"
-  targetAttachment="bottom right"
-  target="#settings-button"
-  }}
-      <div>
-        {{edit-settings liveMonitoring=settings.live timeframe=settings.timeframe apply=(action "applySettings") close=(action "toggleSettings")}}
+<div class="ember-view">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="#">ADS-B Monitor</a>
+          </div>
+          <div class="collapse navbar-collapse navbar-right navbar-inverse" id="navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                  <li id="settings-button"><a onclick={{action "toggleSettings" preventDefault=true}}><span class="glyphicon glyphicon-plane" style="font-size:1.3em;"></span></a></li>
+              </ul>
+          </div>
       </div>
-  {{/tether-dialog}}
-{{/if}}
-<div class="container">
-  {{outlet}}
+  </nav>
+  {{#if showSettings}}
+    <TetherDialog @close={{action "toggleSettings"}} @attachment="top right" @targetAttachment="bottom right" @target="#settings-button">
+        <div>
+          <EditSettings @liveMonitoring={{settings.live}} @timeframe={{settings.timeframe}} @apply={{action "applySettings"}} @close={{action "toggleSettings"}} />
+        </div>
+    </TetherDialog>
+  {{/if}}
+  <div class="container">
+    {{outlet}}
+  </div>
 </div>
