@@ -35,7 +35,7 @@
     "ember-cli-eslint": "^5.1.0",
     "ember-cli-htmlbars": "^4.2.0",
     "ember-cli-inject-live-reload": "^2.0.1",
-    "ember-cli-moment-shim": "^3.0.1",
+    "ember-cli-moment-shim": "^3.7.1",
     "ember-cli-sass": "6.1.1",
     "ember-cli-shims": "^1.2.0",
     "ember-cli-sockjs": "1.0.0",
@@ -53,7 +53,7 @@
     "ember-load-initializers": "^2.1.1",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-modal-dialog": "2.4.4",
-    "ember-moment": "^7.8.0",
+    "ember-moment": "^8.0.0",
     "ember-qunit": "^4.6.0",
     "ember-resolver": "^7.0.0",
     "ember-source": "~3.15.0",
@@ -69,5 +69,6 @@
   },
   "ember": {
     "edition": "octane"
-  }
+  },
+  "dependencies": {}
 }
