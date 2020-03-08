@@ -1,11 +1,15 @@
+import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import Service from '@ember/service';
-export default Service.extend({
-  isLoaded: computed(function() {
+@classic
+export default class MapService extends Service {
+  @computed
+  get isLoaded() {
     return window.google !== undefined;
-  }),
+  }
 
-  defaultMapType: computed(function() {
+  @computed
+  get defaultMapType() {
     return google !== undefined ? google.maps.MapTypeId.TERRAIN : "";
-  })
-});
+  }
+}

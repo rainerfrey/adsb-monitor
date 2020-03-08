@@ -1,22 +1,28 @@
-import { isEmpty } from '@ember/utils';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { isEmpty } from '@ember/utils';
 import Controller from '@ember/controller';
 
-export default Controller.extend({
-  settings: service(),
-  showSettings: false,
+@classic
+export default class ApplicationController extends Controller {
+  @service
+  settings;
 
-  actions: {
-    toggleSettings() {
-      this.toggleProperty("showSettings");
-    },
-    applySettings(timeframe, liveMonitoring) {
-      if(!isEmpty(timeframe)) {
-        this.set("settings.timeframe", timeframe);
-      }
-      if(!isEmpty(liveMonitoring)) {
-        this.settings.setLiveMonitoring(liveMonitoring);
-      }
+  showSettings = false;
+
+  @action
+  toggleSettings() {
+    this.toggleProperty("showSettings");
+  }
+
+  @action
+  applySettings(timeframe, liveMonitoring) {
+    if(!isEmpty(timeframe)) {
+      this.set("settings.timeframe", timeframe);
+    }
+    if(!isEmpty(liveMonitoring)) {
+      this.settings.setLiveMonitoring(liveMonitoring);
     }
   }
-});
+}

@@ -1,14 +1,19 @@
-import { observer } from '@ember/object';
+import classic from 'ember-classic-decorator';
+import { observes } from '@ember-decorators/object';
+import '@ember/object';
 import { run } from '@ember/runloop';
 import GMapMarkerComponent from 'ember-g-map/components/g-map-marker';
 import planeIcons from 'adsb-client/utils/plane-icon';
 
-export default GMapMarkerComponent.extend({
-  selected: false,
+@classic
+export default class FlightMarker extends GMapMarkerComponent {
+  selected = false;
+
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     this.updateIcon();
-  },
+  }
+
   getIcon() {
     let heading = this.heading;
     let selected = this.selected;
@@ -30,11 +35,14 @@ export default GMapMarkerComponent.extend({
       strokeWeight: weight,
       rotation: rotation
     };
-  },
+  }
+
   updateIcon() {
     this.set('icon', this.getIcon());
-  },
-  selectedChanged: observer('selected', function() {
+  }
+
+  @observes('selected')
+  selectedChanged() {
     run.once(this, 'updateIcon');
-  })
-});
+  }
+}

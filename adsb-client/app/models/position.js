@@ -1,14 +1,31 @@
+import classic from 'ember-classic-decorator';
 import { alias } from '@ember/object/computed';
 import Model, { attr } from '@ember-data/model';
 
 
-export default Model.extend({
-  flightId: alias("id"),
-  icao: attr('string'),
-  aircraft: attr(),
-  altitude: attr('number'),
-  speed: attr('number'),
-  heading: attr('number'),
-  lastTimestamp: attr('date'),
-  positions: attr()
-});
+@classic
+export default class Position extends Model {
+  @alias("id")
+  flightId;
+
+  @attr('string')
+  icao;
+
+  @attr()
+  aircraft;
+
+  @attr('number')
+  altitude;
+
+  @attr('number')
+  speed;
+
+  @attr('number')
+  heading;
+
+  @attr('date')
+  lastTimestamp;
+
+  @attr()
+  positions;
+}

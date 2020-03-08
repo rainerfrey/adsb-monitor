@@ -1,8 +1,10 @@
+import classic from 'ember-classic-decorator';
 import { get } from '@ember/object';
 import HalSerializer from "ember-data-hal-9000/serializer";
 
-export default HalSerializer.extend({
-  serialize(snapshot, options){
+@classic
+export default class Application extends HalSerializer {
+  serialize(snapshot, options) {
     let json = {};
 
     if (options && options.includeId) {
@@ -26,7 +28,7 @@ export default HalSerializer.extend({
     });
 
     return json;
-  },
+  }
 
   serializeAttribute(snapshot, json, key, attribute/*, options */) {
     let type = attribute.type;
@@ -46,7 +48,7 @@ export default HalSerializer.extend({
 
       json[payloadKey] = value;
     }
-  },
+  }
 
   serializeBelongsTo(snapshot, json, relationship, options) {
     let key = relationship.key;
@@ -67,7 +69,8 @@ export default HalSerializer.extend({
         }
       }
     }
-  },
+  }
+
   serializeHasMany(snapshot, json, relationship, options) {
     let key = relationship.key;
 
@@ -89,4 +92,4 @@ export default HalSerializer.extend({
       }
     }
   }
-});
+}

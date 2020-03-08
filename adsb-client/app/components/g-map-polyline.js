@@ -1,38 +1,43 @@
+import classic from 'ember-classic-decorator';
+import { observes } from '@ember-decorators/object';
 import { alias } from '@ember/object/computed';
 import Component from '@ember/component';
 import { isPresent, isEmpty } from '@ember/utils';
-import { observer } from '@ember/object';
+import '@ember/object';
 import { run } from '@ember/runloop';
 import { assert } from '@ember/debug';
 import GMapComponent from 'ember-g-map/components/g-map';
 
-const GMapPolyLineComponent = Component.extend({
-  selected: true,
-  positionalParams: ['mapContext'],
-  map: alias('mapContext.map'),
+@classic
+class GMapPolyLineComponent extends Component {
+  selected = true;
+  positionalParams = ['mapContext'];
+
+  @alias('mapContext.map')
+  map;
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     let mapContext = this.mapContext;
     assert('Must be inside {{#g-map}} component with context set', mapContext instanceof GMapComponent);
-  },
+  }
 
   didInsertElement() {
-    this._super();
+    super.didInsertElement();
     if (isEmpty(this.line)) {
       let line = new google.maps.Polyline(this.getPolyLineOptions());
       this.set('line', line);
     }
     this.setPositions();
     this.setMap();
-  },
+  }
 
   willDestroyElement() {
     let line = this.line;
     if (isPresent(line)) {
       line.setMap(null);
     }
-  },
+  }
 
   setMap() {
     let map = this.map;
@@ -41,14 +46,14 @@ const GMapPolyLineComponent = Component.extend({
     if (isPresent(line) && isPresent(map)) {
       line.setMap(map);
     }
-  },
+  }
 
   unsetFromMap() {
     let line = this.line;
     if(isPresent(line)) {
       line.setMap(null);
     }
-  },
+  }
 
   setPositions() {
     let line = this.line;
@@ -57,7 +62,7 @@ const GMapPolyLineComponent = Component.extend({
       let points = positions.map(position => new google.maps.LatLng(position.latitude, position.longitude));
       line.setPath(points);
     }
-  },
+  }
 
   getPolyLineOptions() {
     let selected = this.selected;
@@ -70,27 +75,30 @@ const GMapPolyLineComponent = Component.extend({
       strokeOpacity: 0.8,
       strokeWeight: weight
     };
-  },
+  }
 
   setLineOptions() {
     let line = this.line;
     if(isPresent(line)) {
       line.setOptions(this.getPolyLineOptions());
     }
-  },
+  }
 
-  mapWasSet: observer('map', function() {
+  @observes('map')
+  mapWasSet() {
     run.once(this, 'setMap');
-  }),
+  }
 
-  positionsChanged: observer('positions.[]', function () {
+  @observes('positions.[]')
+  positionsChanged() {
     run.once(this, 'setPositions');
-  }),
+  }
 
-  selectionChanged: observer('selected', function() {
+  @observes('selected')
+  selectionChanged() {
     run.once(this, 'setLineOptions');
-  })
-});
+  }
+}
 
 GMapPolyLineComponent.reopenClass({
   positionalParams: ['mapContext']
