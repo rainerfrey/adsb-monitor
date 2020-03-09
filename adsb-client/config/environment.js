@@ -23,9 +23,6 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    'g-map': {
-      key: ''
-    },
     moment: {
       // allowEmpty: true
     },
@@ -37,6 +34,9 @@ module.exports = function(environment) {
       timeframe: 15,
       liveMonitoring: true,
       server: "http://localhost:8080"
+    },
+    'ember-google-maps': {
+      key: ''
     }
   };
 

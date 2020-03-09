@@ -1,6 +1,8 @@
 import classic from 'ember-classic-decorator';
-import { alias } from '@ember/object/computed';
-import Model, { attr } from '@ember-data/model';
+import {computed} from '@ember/object';
+import {alias} from '@ember/object/computed';
+import Model, {attr} from '@ember-data/model';
+import planeIcons from 'adsb-client/utils/plane-icon';
 
 
 @classic
@@ -28,4 +30,13 @@ export default class Position extends Model {
 
   @attr()
   positions;
+
+  @computed('positions')
+  get points() {
+    return this.positions.map(position => {
+      return {
+        lat: position.latitude, lng: position.longitude
+      }
+    });
+  }
 }

@@ -1,22 +1,29 @@
 <div class="row">
-    <p>{{outlet}}</p>
+  <p>{{outlet}}</p>
 </div>
 <div class="row">
-    <div class="col-md-9">
-{{#if map.isLoaded}}
-      {{#g-map as lat=home.lat lng=home.lng zoom=9 options=mapOptions as |map|}}
-        {{g-map-marker map lat=home.lat lng=home.lng icon=homeIcon}}
-        {{#each model as |flight|}}
-          {{#flight-marker map group='flights' lat=flight.positions.lastObject.latitude lng=flight.positions.lastObject.longitude title=flight.flightId heading=flight.heading selected=(eq flight currentFlight) onClick=(action "selectFlight" flight) as |markerContext|}}
-            {{#g-map-infowindow markerContext openOn="mouseover" closeOn="mouseout"}}<InfoWindow @flight={{flight}} />{{/g-map-infowindow}}
-          {{/flight-marker}}
-          {{g-map-polyline map selected=(eq flight currentFlight) positions=flight.positions}}
-        {{/each}}
-      {{/g-map}}
-{{/if}}
-    </div>
-    <div class="col-md-3">
-      <CurrentFlight @flight={{currentFlight}} />
-      <FlightList @flights={{model}} @currentFlight={{currentFlight}} @lastTimestamp={{lastTimestamp}} @selectFlight={{action "selectFlight"}} />
-    </div>
+  <div class="col-md-9">
+    {{#g-map lat=home.lat lng=home.lng zoom=9 mapTypeId=google.maps.MapTypeId.TERRAIN as |m|}}
+      {{m.marker lat=home.lat lng=home.lng icon=homeIcon}}
+      {{#each model as |flight|}}
+        {{#m.marker group='flights' lat=flight.positions.lastObject.latitude lng=flight.positions.lastObject.longitude
+                    title=flight.flightId heading=flight.heading icon=(flight-icon flight (eq flight currentFlight))
+                    onClick=(action "selectFlight" flight) as |fm|}}
+          {{#fm.infoWindow isOpen=(eq flight currentFlight) as |i|}}
+            <InfoWindow @flight={{flight}} />
+          {{/fm.infoWindow}}
+        {{/m.marker}}
+        {{m.polyline path=flight.points
+                     geodesic=true
+                     strokeColor="#FF8000"
+                     strokeOpacity=0.8
+                     strokeWeight=(if (eq flight currentFlight) 2 1)}}
+      {{/each}}
+    {{/g-map}}
+  </div>
+  <div class="col-md-3">
+    <CurrentFlight @flight={{currentFlight}} />
+    <FlightList @flights={{model}} @currentFlight={{currentFlight}} @lastTimestamp={{lastTimestamp}}
+                @selectFlight={{action "selectFlight"}} />
+  </div>
 </div>
